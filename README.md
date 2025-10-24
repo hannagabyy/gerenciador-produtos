@@ -1,4 +1,40 @@
 
+## 📷 Capturas de Tela
+
+**Tela de Listagem de Produtos**  
+![Lista de Produtos](public/screenshots/index.png)
+
+**Formulário de Cadastro/Atualização**  
+![Formulário Produto](public/screenshots/form.png)
+
+**Relatório em PDF**  
+![Relatório Produtos](public/screenshots/report.png)
+
+#  Gerenciador de Produtos - Laravel
+
+Aplicação web de gerenciamento de produtos, com cadastro de usuários, autenticação, CRUD de produtos, relatórios em PDF.
+
+
+## Funcionalidades
+
+- Registro e login de usuários.
+- CRUD completo de produtos (criar, listar, editar, excluir).
+- Geração de relatórios em PDF:
+  - Lista de produtos em estoque (com total de valor e quantidade).
+  - Lista de usuários cadastrados.
+- Frontend responsivo com Bootstrap 5.
+- Validação de dados nos formulários.
+- Autenticação Laravel Sanctum.
+
+## Requisitos
+
+- PHP >= 8.1 
+- Extensões PHP: `mbstring`, `xml`, `bcmath`, `curl`, `zip`, `gd`, `intl`, `mysql`, `sqlite3`
+- Composer 
+- MySQL ou PostgreSQL
+- Laravel >= 9.x
+
+
 ## Instalação
 
 1. **Clone o repositório:**
@@ -49,4 +85,4 @@ php artisan migrate --seed
 ```bash
 php artisan serve
 ````
--Teste o usuário teste email:'admin@gmail.com' senha:'12345678' ou crie um novo usuário.
+-Teste o usuário teste email: 'admin@gmail.com' senha: '12345678' ou crie um novo usuário.
