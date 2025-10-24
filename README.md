@@ -1,18 +1,21 @@
+#  Gerenciador de Produtos - Laravel
+
+Aplicação web de gerenciamento de produtos, com cadastro de usuários, autenticação, CRUD de produtos, relatórios em PDF.
+
+
 
 ## 📷 Capturas de Tela
 
 **Tela de Listagem de Produtos**  
-![Lista de Produtos](public/screenshots/index.png)
+![Lista de Produtos](https://github.com/user-attachments/assets/929f5877-4262-4907-bf28-cd15cf807961)
 
 **Formulário de Cadastro/Atualização**  
-![Formulário Produto](public/screenshots/form.png)
+![Formulário Produto](https://github.com/user-attachments/assets/40bf1546-f1ef-4d56-991c-e3251c71ee0e)
+
 
 **Relatório em PDF**  
-![Relatório Produtos](public/screenshots/report.png)
+![Relatório Produtos](https://github.com/user-attachments/assets/78a01229-f469-4825-9e2a-6ec2105e1670)
 
-#  Gerenciador de Produtos - Laravel
-
-Aplicação web de gerenciamento de produtos, com cadastro de usuários, autenticação, CRUD de produtos, relatórios em PDF.
 
 
 ## Funcionalidades
