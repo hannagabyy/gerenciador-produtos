@@ -1,59 +1,53 @@
 @extends('layouts.app')
 
 @section('content')
-        <h2>Login</h2>
-        @if($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
+<div class="container my-5 d-flex justify-content-center">
+    <div class="card shadow-sm border-0 rounded-4" style="max-width: 450px; width: 100%;">
+        <div class="card-body p-4">
+
+            
+            <div class="text-center mb-4">
+                <h2 class="fw-bold text-primary">
+                    <i class="bi bi-person-circle me-2"></i>Login
+                </h2>
             </div>
-        @endif
-        @if(session('message'))
-            <div class="alert alert-success">{{ session('message') }}</div>
-        @endif
-        <form action="{{ route('login') }}" method="POST">
-            @csrf
-            <div class="mb-3">
-                <label for="email" class="form-label">E-mail</label>
-                <input type="email" class="form-control" id="email" name="email" value="{{ old('email') }}" required>
-            </div>
-            <div class="mb-3">
-                <label for="password" class="form-label">Senha</label>
-                <input type="password" class="form-control" id="password" name="password" required>
-            </div>
-            <button type="submit" class="btn btn-primary">Entrar</button>
-        </form>
-        <p class="mt-3">Não tem conta? <a href="{{ route('register.form') }}">Registre-se</a></p>
+
+
+            <form action="{{ route('login') }}" method="POST" id="login-form" class="needs-validation" novalidate>
+                @csrf
+
+                <div class="mb-3">
+                    <label for="email" class="form-label fw-semibold">E-mail:</label>
+                    <input type="email" class="form-control text-center" id="email" 
+                           name="email" value="{{ old('email') }}" required>
+                    <div class="invalid-feedback text-center">
+                        Informe um e-mail válido.
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="password" class="form-label fw-semibold">Senha:</label>
+                    <input type="password" class="form-control text-center" id="password" 
+                           name="password" required>
+                    <div class="invalid-feedback text-center">
+                        Informe sua senha.
+                    </div>
+                </div>
+
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary shadow-sm">
+                        <i class="bi bi-box-arrow-in-right me-1"></i> Entrar
+                    </button>
+                </div>
+            </form>
+
+            <p class="text-center mt-4 mb-0">
+                Não tem conta?
+                <a href="{{ route('register.form') }}" class="text-decoration-none fw-semibold">
+                    Registre-se
+                </a>
+            </p>
+        </div>
     </div>
- @endsection
-    
-    @section('scripts')
-    <script>
-        console.log('kaaaaaaaaaaaaaaaaa');
-            axios.post('/login', { 
-            email: 'user@example.com', 
-            password: 'password' 
-        })
-        .then(response => {
-            console.log(response);
-            // 1. Sucesso no login, pega o token
-            const token = response.data.token;
-            
-            // 2. Salva o token para ser usado em outras páginas
-            localStorage.setItem('api_token', token); 
-            
-            // 3. Redireciona o usuário para a página principal
-            // window.location.href = '/'; // Ou '/produtos', '/dashboard', etc.
-
-        })
-        .catch(error => {
-            // 4. ADICIONADO: Tratamento de erro
-            console.error('Erro no login:', error.response ? error.response.data : error.message);
-            alert('Login ou senha inválidos!');
-        });
-
-    </script>
-    @endsection
+</div>
+@endsection

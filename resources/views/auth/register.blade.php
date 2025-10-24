@@ -1,47 +1,61 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registrar Usuário</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"> <!-- Opcional: Bootstrap para estilização -->
-</head>
-<body>
-    <div class="container mt-5">
-        <h2>Registrar Usuário</h2>
-        @if($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
+@extends('layouts.app')
+
+@section('content')
+<div class="container my-5 d-flex justify-content-center">
+    <div class="card shadow-sm border-0 rounded-4" style="max-width: 500px; width: 100%;">
+        <div class="card-body p-4">
+
+            <div class="text-center mb-4">
+                <h2 class="fw-bold text-primary">
+                    <i class="bi bi-person-plus-fill me-2"></i>Registrar Usuário
+                </h2>
             </div>
-        @endif
-        @if(session('message'))
-            <div class="alert alert-success">{{ session('message') }}</div>
-        @endif
-        <form action="{{ route('register') }}" method="POST">
-            @csrf
-            <div class="mb-3">
-                <label for="name" class="form-label">Nome</label>
-                <input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}" required>
-            </div>
-            <div class="mb-3">
-                <label for="email" class="form-label">E-mail</label>
-                <input type="email" class="form-control" id="email" name="email" value="{{ old('email') }}" required>
-            </div>
-            <div class="mb-3">
-                <label for="password" class="form-label">Senha</label>
-                <input type="password" class="form-control" id="password" name="password" required>
-            </div>
-            <div class="mb-3">
-                <label for="password_confirmation" class="form-label">Confirmar Senha</label>
-                <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" required>
-            </div>
-            <button type="submit" class="btn btn-primary">Registrar</button>
-        </form>
-        <p class="mt-3">Já tem conta? <a href="{{ route('login.form') }}">Faça login</a></p>
+
+    
+            <form action="{{ route('register.form') }}" method="POST" class="needs-validation" novalidate>
+                @csrf
+
+                <div class="mb-3">
+                    <label for="name" class="form-label fw-semibold">Nome: *</label>
+                    <input type="text" class="form-control text-center" id="name" name="name" 
+                           value="{{ old('name') }}" required>
+                    <div class="invalid-feedback text-center">Informe seu nome.</div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="email" class="form-label fw-semibold">E-mail: *</label>
+                    <input type="email" class="form-control text-center" id="email" name="email"
+                           value="{{ old('email') }}" required>
+                    <div class="invalid-feedback text-center">Informe um e-mail válido.</div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="password" class="form-label fw-semibold">Senha: *</label>
+                    <input type="password" class="form-control text-center" id="password" name="password" required>
+                    <div class="invalid-feedback text-center">Informe uma senha.</div>
+                </div>
+
+                <div class="mb-4">
+                    <label for="password_confirmation" class="form-label fw-semibold">Confirmar Senha: *</label>
+                    <input type="password" class="form-control text-center" id="password_confirmation" 
+                           name="password_confirmation" required>
+                    <div class="invalid-feedback text-center">Confirme sua senha.</div>
+                </div>
+
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary shadow-sm">
+                        <i class="bi bi-check-circle me-1"></i> Registrar
+                    </button>
+                </div>
+            </form>
+
+            <p class="text-center mt-4 mb-0">
+                Já tem conta?
+                <a href="{{ route('login.form') }}" class="text-decoration-none fw-semibold">
+                    Faça login
+                </a>
+            </p>
+        </div>
     </div>
-</body>
-</html>
+</div>
+@endsection

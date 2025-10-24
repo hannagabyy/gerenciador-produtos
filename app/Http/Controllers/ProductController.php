@@ -7,14 +7,21 @@ use App\Models\Product;
 
 class ProductController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::all();
-        return view('products.index', compact('products'));
+
+         if ($request->expectsJson()) {
+            return response()->json(Product::all());
+        }
+        
+        return view('products.index', ['products' => Product::all()]);
+        
     }
 
     public function store(Request $request)
     {
+    
+
         $request->merge([
             'preco' => str_replace(['.', ','], ['', '.'], $request->preco)
         ]);
@@ -22,10 +29,13 @@ class ProductController extends Controller
         $request->validate([
             'titulo' => 'required',
             'preco' => 'required|numeric',
-            'quantidade' => 'required|integer',
-        ]);
-        // print_r( $request->all());
-        // sleep(100);
+            'quantidade' => 'required|integer|min:0',
+        ],
+        [
+            'quantidade.min' => 'A quantidade não pode ser menor que zero.',
+        ],
+        );
+        
         try {
             
            
@@ -57,8 +67,12 @@ class ProductController extends Controller
         $request->validate([
             'titulo' => 'required',
             'preco' => 'required|numeric',
-            'quantidade' => 'required|integer',
-        ]);
+            'quantidade' => 'required|integer|min:0',
+        ],
+        [
+            'quantidade.min' => 'A quantidade não pode ser menor que zero.',
+        ],
+        );
        
         try {
             $product->update($request->all());
@@ -79,12 +93,12 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         try {
-            // Exclui o produto
+            
             $product->delete();
-            // Redireciona para a lista de produtos com mensagem de sucesso
+            
             return redirect()->route('products.index')->with('success', 'Produto excluído com sucesso!');
         } catch (\Exception $e) {
-            // Redireciona de volta com mensagem de erro
+            
             return redirect()->back()->with('error', 'Erro ao excluir o produto: ' . $e->getMessage());
         }
     }

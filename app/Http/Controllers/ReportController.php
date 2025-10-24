@@ -10,42 +10,45 @@ use Carbon\Carbon;
 
 class ReportController extends Controller
 {
-    // public function usersReport()
-    // {
-    //     $users = User::all();
+    public function usersReport()
+    {
+        $users = User::all();
 
-    //     $pdf = new TCPDF();
-    //     $pdf->SetCreator(PDF_CREATOR);
-    //     $pdf->SetAuthor('Sistema de Gerenciamento de Produtos');
-    //     $pdf->SetTitle('Relatório de Usuários Cadastrados');
-    //     $pdf->SetSubject('Lista de Usuários');
-    //     $pdf->SetKeywords('Usuários, Relatório, PDF');
+        // Configurar header personalizado
+        $pdf = new CustomPDF();
+        $pdf->SetTitle('Relatório de Usuários Cadastrados');
+        $pdf->empresaNome = 'Nome da Empresa';
+        $pdf->empresaEndereco = 'Endereço da Empresa';
+        $pdf->empresaCNPJ = 'CNPJ: 00.000.000/0000-00';
+        $pdf->logoPath = public_path('images/logo.png');
+        Carbon::setLocale('pt_BR');
+        $mes = Carbon::now()->translatedFormat('F / Y'); 
+        $pdf->mesReferencia = ucfirst($mes);
 
-    //     // Configurar header personalizado
-    //     $this->setCustomHeader($pdf);
 
-    //     $pdf->AddPage();
-    //     $pdf->SetFont('helvetica', '', 12);
+        $pdf->AddPage();
+        $pdf->SetFont('helvetica', 'B', 12);
 
-    //     $pdf->Cell(0, 10, 'Relatório de Usuários Cadastrados', 0, 1, 'C');
-    //     $pdf->Ln(10);
+        $pdf->Ln(30);
+        $pdf->Cell(0, 15, 'Relatório de Usuários Cadastrados', 0, 1, 'C');
+        $pdf->Ln(8);
 
-    //     $pdf->SetFont('helvetica', 'B', 10);
-    //     $pdf->Cell(40, 10, 'ID', 1);
-    //     $pdf->Cell(80, 10, 'Nome', 1);
-    //     $pdf->Cell(70, 10, 'Email', 1);
-    //     $pdf->Ln();
+        $pdf->SetFont('helvetica', 'B', 10);
+        $pdf->Cell(40, 10, 'ID', 1);
+        $pdf->Cell(80, 10, 'Nome', 1);
+        $pdf->Cell(70, 10, 'Email', 1);
+        $pdf->Ln();
 
-    //     $pdf->SetFont('helvetica', '', 10);
-    //     foreach ($users as $user) {
-    //         $pdf->Cell(40, 10, $user->id, 1);
-    //         $pdf->Cell(80, 10, $user->name, 1);
-    //         $pdf->Cell(70, 10, $user->email, 1);
-    //         $pdf->Ln();
-    //     }
+        $pdf->SetFont('helvetica', '', 10);
+        foreach ($users as $user) {
+            $pdf->Cell(40, 10, $user->id, 1);
+            $pdf->Cell(80, 10, $user->name, 1);
+            $pdf->Cell(70, 10, $user->email, 1);
+            $pdf->Ln();
+        }
 
-    //     $pdf->Output('relatorio_produtos.pdf', 'D');
-    // }
+        $pdf->Output('relatorio_produtos.pdf', 'D');
+    }
 
     public function productsReport()
     {
