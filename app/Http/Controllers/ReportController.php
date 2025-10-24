@@ -52,7 +52,7 @@ class ReportController extends Controller
 
     public function productsReport()
     {
-        $products = Product::all();
+        $products = Product::where('status', 1)->get();
         $totalItems = $products->sum('quantidade');
         $totalValue = $products->sum(fn($p) => $p->preco * $p->quantidade);
 
